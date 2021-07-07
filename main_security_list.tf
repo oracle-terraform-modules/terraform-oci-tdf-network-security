@@ -545,8 +545,8 @@ resource "oci_core_security_list" "this" {
     for_each            = [for x in var.security_lists[keys(var.security_lists)[count.index]].ingress_rules != null ? var.security_lists[keys(var.security_lists)[count.index]].ingress_rules : local.default_security_list_opt.ingress_rules :
       {
         proto           : x.protocol
-        dst             : x.dst
-        dst_type        : x.dst_type
+        src             : x.src
+        src_type        : x.src_type
         stateless       : x.stateless
       } if x.protocol == "1" && x.icmp_type == null && x.icmp_code == null ]
       
